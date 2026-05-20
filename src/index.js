@@ -25,7 +25,7 @@ app.use(
   cors({
     origin: [
   "http://localhost:3000",
-  "https://your-vercel-app.vercel.app"
+  "https://project-pet-adoption-client-8uvh.vercel.app",
 ],
     credentials: true,
   })
