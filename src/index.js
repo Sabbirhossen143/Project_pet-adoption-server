@@ -173,38 +173,47 @@ app.get("/pets", async (req, res) => {
 
   try {
 
-    const search = req.query.search || "";
+    const { search, species, location } = req.query;
 
-    const species = req.query.species || "";
-
-    const query = {};
+    let query = {};
 
 
 
-    // Search By Name
+    // SEARCH
     if (search) {
 
       query.petName = {
         $regex: search,
         $options: "i",
       };
+
     }
 
 
 
-    // Filter By Species
+    // SPECIES
     if (species) {
 
-      query.species = {
-        $in: [species],
+      query.species = species;
+
+    }
+
+
+
+    // LOCATION
+    if (location) {
+
+      query.location = {
+        $regex: location,
+        $options: "i",
       };
+
     }
 
 
 
     const result = await petsCollection
       .find(query)
-      .sort({ createdAt: -1 })
       .toArray();
 
     res.send(result);
@@ -214,11 +223,12 @@ app.get("/pets", async (req, res) => {
     console.log(error);
 
     res.status(500).send({
-      message: "Failed To Fetch Pets",
+      message: "Failed to fetch pets",
     });
-  }
-});
 
+  }
+
+});
 
 
 // =========================
