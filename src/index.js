@@ -24,9 +24,12 @@ const port = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [
-  "http://localhost:3000",
-  "https://project-pet-adoption-client-8uvh.vercel.app",
-],
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://project-pet-adoption-client.vercel.app",
+      "https://project-pet-adoption-client-8uvh.vercel.app",
+    ],
+
     credentials: true,
   })
 );
